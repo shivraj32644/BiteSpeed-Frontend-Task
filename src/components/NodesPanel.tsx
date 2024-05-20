@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { Button } from "./ui/button";
 
 interface INodePanelProps {
   checkUnconnectedNodes: () => void;
@@ -13,28 +14,37 @@ interface INodePanelProps {
 const nodesArr = [
   {
     id: 1,
-    nodeType: "textNode",
+    nodeType: "messageNode",
     icon: <MessageCircleMore className="text-[#25D366] h-10 w-10" />,
     nodeName: "Message",
     cardDescription:"Drag and Drop this card to add a text node"
   },
-  
+  // Additional nodes can be added here
 ];
 
 export const NodesPanel = ({ checkUnconnectedNodes }: INodePanelProps) => {
-  const onDragStart = (event: React.DragEvent, nodeType: string) => {
+// Function to handle drag start event
+  const handleDragStart = (event: React.DragEvent, nodeType: string) => {
+    // Setting the data to be transferred during the drag event so that we can use at the time of onDrop
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
   };
 
   return (
-    <div className="border relative w-full h-full p-4 ">
-      {/* Message Node */}
-      <div className="h-[460px] border-b flex flex-col gap-3 px-4 py-6 overflow-auto">
+    <div className="border w-full h-full ">
+      <Button
+          className="mt-2 ml-3"
+          onClick={checkUnconnectedNodes}
+        >
+          Save Flow
+        </Button>
+   
+      <div className="h-[80vh] global-scroll-bar  flex flex-col gap-3 px-4 py-6 overflow-auto">
+        {/* Mapping the nodes to show all differrent types of nodes */}
         {nodesArr.map((node) => (
           <Card
             key={node.id}
-            onDragEnter={(event) => onDragStart(event, node.nodeType)}
+            onDragStart={(event) => handleDragStart(event, node.nodeType)}
             draggable
             className="flex w-full cursor-grab items-center justify-between"
           >
@@ -52,14 +62,7 @@ export const NodesPanel = ({ checkUnconnectedNodes }: INodePanelProps) => {
           </Card>
         ))}
       </div>
-      <div className="absolute flex items-center justify-center w-[80%] bottom-8">
-        <button
-          className=" m-auto  border border-blue-400 py-2 px-6 rounded hover:bg-blue-500 hover:text-white"
-          onClick={checkUnconnectedNodes}
-        >
-          Save Flow
-        </button>
-      </div>
+     
     </div>
   );
 };

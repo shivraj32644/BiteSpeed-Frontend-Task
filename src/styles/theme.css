@@ -4,10 +4,10 @@
 
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
-
+  --card-secondary:"#eeeeee";
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-
+  --text-color:"#000";
   --primary: 222.2 47.4% 11.2%;
   --primary-foreground: 210 40% 98%;
 
@@ -35,7 +35,7 @@
 
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
-
+  --card-secondary:"#eeeeee";
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
 
@@ -44,7 +44,7 @@
 
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
-
+  --text-color:"#fff";
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
 

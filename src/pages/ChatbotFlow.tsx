@@ -19,13 +19,16 @@ import "reactflow/dist/style.css";
 
 import { NodesPanel } from "../components/NodesPanel";
 import SettingsPanel from "../components/SettingsPanel";
+import MessageNode from "../components/CustomNodes/MessageNode";
+import { toast } from "sonner";
 
+const nodeTypes = { messageNode: MessageNode };
 
 // An array of initial Nodes if you want to display some initial node in this app
 const initialNodes = [
 
-  { id: "1",sourcePosition: Position.Right, targetPosition: Position.Left, position: { x: 100, y: 100 }, data: { label: "1" } },
-  { id: "2", sourcePosition: Position.Right, targetPosition: Position.Left, position: { x: 100, y: 200 }, data: { label: "2" } },
+  { id: "1",type: 'messageNode', sourcePosition: Position.Right, targetPosition: Position.Left, position: { x: 100, y: 100 }, data: { label: "Message One" } },
+  { id: "2",type: 'messageNode',  sourcePosition: Position.Right, targetPosition: Position.Left, position: { x: 400, y: 200 }, data: { label: "Message Two" } },
     //... More initial nodes object
 ];
 
@@ -73,7 +76,8 @@ export default function ChatbotFlow() {
         setEdges((eds) => addEdge(params, eds));
       } else {
         // if user violates the condition then we show an alert to user
-        alert('A source handle can only have one edge originating from it.');
+        toast.warning('A source handle can only have one edge originating from it.')
+        
       }
     },
     [edges, setEdges]
@@ -83,7 +87,8 @@ export default function ChatbotFlow() {
   const handleOnDrop = (event: React.DragEvent) => {
     event.preventDefault();
     const reactFlowBounds = event.currentTarget.getBoundingClientRect();
-    const type = event.dataTransfer.getData("application/reactflow");
+    const type = event.dataTransfer.getData("application/reactflow")
+   
     const position = project({
       x: event.clientX - 50 - reactFlowBounds.left,
       y: event.clientY - 10 - reactFlowBounds.top,
@@ -126,9 +131,11 @@ export default function ChatbotFlow() {
 
     // Checking if there are any unconnected nodes
     if (unconnectedNodes.length > 0) {
-      alert('There are unconnected nodes!Please connect all Nodes to save the flow');
+        toast.error('There are some unconnected nodes! Please connect all Nodes to save the flow')
+    
     } else {
-      alert('Flow Save Successfully!');
+        toast.success('Flow Save Successfully!')
+    
     }
   };
   return (
@@ -149,6 +156,7 @@ export default function ChatbotFlow() {
             onNodeClick={handleNodeClick}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
+            nodeTypes={nodeTypes}
           >
             <NodeResizer />
             <NodeResizeControl />

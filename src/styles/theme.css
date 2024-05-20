@@ -1,0 +1,20 @@
+[data-theme='light'] {
+	--background: #f9fafc;
+	--foreground: theme(colors.stone.900);
+    --background-inverse:#000;
+	
+	--border: #eeeeee;
+	--input: 214.3 31.8% 91.4%;
+	
+}
+[data-theme='dark'] {
+	--background: #222831;
+	--foreground: theme(colors.slate.200);
+    --background-inverse:#fff;
+	
+	--ring: 0 72.2% 50.6%;
+	--text-color: '#fff';
+
+	--radius: 0.4rem;
+}
+

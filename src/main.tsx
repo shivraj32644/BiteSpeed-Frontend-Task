@@ -1,10 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './global.css'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import { ReactFlowProvider } from "reactflow";
+import "./styles/global.css";
+import "./styles/theme.css";
+import "reactflow/dist/style.css";
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <ReactFlowProvider>
+      <div className="bg-[var(--background)]">
+      <App />
+
+      </div>
+    </ReactFlowProvider>
+  </React.StrictMode>
+);
